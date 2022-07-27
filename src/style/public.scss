@@ -1,0 +1,115 @@
+// public scss 公共方法/变量的封装
+
+// 兼容 IE 9、Firefox、Safaria和Chrome、Opera 
+$adapter: -ms- -moz- -webkit- -o-;
+$blue: #1586ff;
+$fontColor:#2c3e50;
+
+
+$dark: #17181a;
+$dark-light: #1e2022;
+$dark-gary: #2e3033;
+$dark-font: #e0e0e0;
+
+%dark-flash {
+  transition: all 1s;
+}
+
+
+
+
+%center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+%table-page {
+  padding-bottom: 30px;
+  width: 1470px;
+  min-height: 700px;
+  background: #ffffff;
+  box-shadow: 0px 2px 10px 0px rgba(6, 4, 4, 0.1);
+  border-radius: 10px;
+}
+
+%dialog-header {
+  :deep(.el-dialog) {
+    position: relative;
+    margin: 5vh auto 1vh;
+  }
+
+  :deep(.el-dialog__header) {
+    background: #414a60;
+
+    .el-dialog__title {
+      color: #fff !important;
+    }
+  }
+
+  :deep(.el-dialog__body) {
+    max-height: 730px;
+    padding-bottom: 80px;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+}
+
+/*
+* $name : assert/icon下icon文件的名字
+* $width : icon的宽度
+* $height : icon的高度
+*/
+@mixin Icon($name, $width, $height) {
+  width: $width;
+  height: $height;
+  background: url("@/assets/icon/"+ $name +".png") no-repeat;
+  background-size: 100% 100%;
+}
+
+
+/*
+* $time : 颜色渲染时间 单位 ms
+*/
+@mixin setColorSlowly($time) {
+  @each $ev in $adapter {
+      &:hover {
+          #{$ev}transition: all $time ease !important;
+      }
+      #{$ev}transition: all $time ease !important;
+  }
+}
+
+/*
+* $dom : 顺时针旋转180°
+*/
+@mixin spinCircle($dom){
+  @each $ev in $adapter{
+
+    &:hover {
+      #{$dom}{
+        #{$ev}animation: spin 0.5s ease-in 0s 1 alternate forwards;
+      }
+    }
+    
+    @keyframes spin { 
+      from { 
+        -webkit-transform: rotate(0deg); 
+      } 
+      to { 
+        -webkit-transform: rotate(-180deg); 
+      } 
+    } 
+
+    @keyframes spin-reverse { 
+      from { 
+        -webkit-transform: rotate(-180deg); 
+      } 
+      to { 
+        -webkit-transform: rotate(0deg); 
+      } 
+    } 
+  }}
+  
+
+// @import url(./index.scss);
